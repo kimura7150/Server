@@ -116,6 +116,9 @@ RULE_INT(Character, TradeskillUpResearch, 1) // Research skillup rate adjust. Lo
 RULE_INT(Character, TradeskillUpTinkering, 2) // Tinkering skillup rate adjust. Lower is faster.
 RULE_BOOL(Character, SpamHPUpdates, false) // if your server has stupid amounts of HP that causes client display issues, turn this on!
 RULE_BOOL(Character, MarqueeHPUpdates, false) // Will show Health % in center of screen < 100%
+RULE_REAL(Character, PetPowerActPower, 50.0f)
+RULE_INT(Character, PetPowerMinDmg, 2)
+RULE_INT(Character, PetPowerMaxDmg, 20)
 RULE_CATEGORY_END()
 
 RULE_CATEGORY(Mercs)
