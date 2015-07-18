@@ -149,7 +149,7 @@ public:
 	int MonkSpecialAttack(Mob* other, uint8 skill_used);
 	virtual void TryBackstab(Mob *other,int ReuseTime = 10);
 	void TriggerDefensiveProcs(const ItemInst* weapon, Mob *on, uint16 hand = MainPrimary, int damage = 0);
-	virtual bool AvoidDamage(Mob* attacker, int32 &damage, bool CanRiposte = true);
+	bool AvoidDamage(Mob* attacker, int32 &damage, int hand);
 	virtual bool CheckHitChance(Mob* attacker, SkillUseTypes skillinuse, int Hand, int16 chance_mod = 0);
 	virtual void TryCriticalHit(Mob *defender, uint16 skill, int32 &damage, ExtraAttackOptions *opts = nullptr);
 	void TryPetCriticalHit(Mob *defender, uint16 skill, int32 &damage);
@@ -166,6 +166,20 @@ public:
 	void CommonOutgoingHitSuccess(Mob* defender, int32 &damage, SkillUseTypes skillInUse);
 	void CommonBreakInvisible();
 	bool HasDied();
+	virtual bool CheckDualWield();
+	void DoMainHandAttackRounds(Mob *target, ExtraAttackOptions *opts = nullptr);
+	void DoOffHandAttackRounds(Mob *target, ExtraAttackOptions *opts = nullptr);
+	virtual bool CheckDoubleAttack();
+	// inline process for places where we need to do them outside of the AI_Process
+	void ProcessAttackRounds(Mob *target, ExtraAttackOptions *opts = nullptr)
+	{
+		if (target) {
+			DoMainHandAttackRounds(target, opts);
+			if (CanThisClassDualWield())
+				DoOffHandAttackRounds(target, opts);
+		}
+		return;
+	}
 
 	//Appearance
 	void SendLevelAppearance();
@@ -322,6 +336,8 @@ public:
 	inline void SetShieldEquiped(bool val) { has_shieldequiped = val; }
 	bool HasTwoHandBluntEquiped() const { return has_twohandbluntequiped; }
 	inline void SetTwoHandBluntEquiped(bool val) { has_twohandbluntequiped = val; }
+	bool HasTwoHanderEquipped() { return has_twohanderequipped; }
+	void SetTwoHanderEquipped(bool val) { has_twohanderequipped = val; }
 	virtual uint16 GetSkill(SkillUseTypes skill_num) const { return 0; }
 	virtual uint32 GetEquipment(uint8 material_slot) const { return(0); }
 	virtual int32 GetEquipmentMaterial(uint8 material_slot) const;
@@ -734,6 +750,7 @@ public:
 	virtual int GetMonkHandToHandDamage(void);
 
 	bool CanThisClassDoubleAttack(void) const;
+	bool CanThisClassTripleAttack() const;
 	bool CanThisClassDualWield(void) const;
 	bool CanThisClassRiposte(void) const;
 	bool CanThisClassDodge(void) const;
@@ -862,8 +879,8 @@ public:
 	bool Charmed() const { return charmed; }
 	static uint32 GetLevelHP(uint8 tlevel);
 	uint32 GetZoneID() const; //for perl
-	virtual int32 CheckAggroAmount(uint16 spell_id, bool isproc = false);
-	virtual int32 CheckHealAggroAmount(uint16 spell_id, uint32 heal_possible = 0);
+	virtual int32 CheckAggroAmount(uint16 spell_id, Mob *target, bool isproc = false);
+	virtual int32 CheckHealAggroAmount(uint16 spell_id, Mob *target, uint32 heal_possible = 0);
 
 	uint32 GetInstrumentMod(uint16 spell_id) const;
 	int CalcSpellEffectValue(uint16 spell_id, int effect_id, int caster_level = 1, uint32 instrument_mod = 10, Mob *caster = nullptr, int ticsremaining = 0);
@@ -1207,6 +1224,7 @@ protected:
 	bool offhand;
 	bool has_shieldequiped;
 	bool has_twohandbluntequiped;
+	bool has_twohanderequipped;
 	bool has_numhits;
 	bool has_MGB;
 	bool has_ProjectIllusion;

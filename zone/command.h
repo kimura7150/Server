@@ -279,8 +279,8 @@ void command_refundaa(Client *c, const Seperator *sep);
 void command_traindisc(Client *c, const Seperator *sep);
 void command_deletegraveyard(Client *c, const Seperator *sep);
 void command_setgraveyard(Client *c, const Seperator *sep);
-void command_getplayerburriedcorpsecount(Client *c, const Seperator *sep);
-void command_summonburriedplayercorpse(Client *c, const Seperator *sep);
+void command_getplayerburiedcorpsecount(Client *c, const Seperator *sep);
+void command_summonburiedplayercorpse(Client *c, const Seperator *sep);
 void command_unscribespell(Client *c, const Seperator *sep);
 void command_scribespell(Client *c, const Seperator *sep);
 void command_refreshgroup(Client *c, const Seperator *sep);
@@ -325,6 +325,11 @@ void command_mysqltest(Client *c, const Seperator *sep);
 void command_logs(Client *c, const Seperator *sep);
 void command_resetaa_timer(Client *c, const Seperator *sep);
 void command_reloadaa(Client *c, const Seperator *sep);
+void command_hotfix(Client *c, const Seperator *sep);
+void command_load_shared_memory(Client *c, const Seperator *sep);
+void command_apply_shared_memory(Client *c, const Seperator *sep);
+void command_untraindisc(Client *c, const Seperator *sep);
+void command_untraindiscs(Client *c, const Seperator *sep);
 
 #ifdef EQPROFILE
 void command_profiledump(Client *c, const Seperator *sep);

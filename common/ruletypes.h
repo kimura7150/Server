@@ -451,6 +451,7 @@ RULE_BOOL(Combat, OneProcPerWeapon, true) //If enabled, One proc per weapon per 
 RULE_BOOL(Combat, ProjectileDmgOnImpact, true) //If enabled, projectiles (ie arrows) will hit on impact, instead of instantly.
 RULE_BOOL(Combat, MeleePush, true) // enable melee push
 RULE_INT(Combat, MeleePushChance, 50) // (NPCs) chance the target will be pushed. Made up, 100 actually isn't that bad
+RULE_BOOL(Combat, UseLiveCombatRounds, true) // turn this false if you don't want to worry about fixing up combat rounds for NPCs
 RULE_CATEGORY_END()
 
 RULE_CATEGORY(NPC)
@@ -508,6 +509,8 @@ RULE_INT(Bots, BotAAExpansion, 8) // Bots get AAs through this expansion
 RULE_BOOL(Bots, BotGroupXP, false) // Determines whether client gets xp for bots outside their group.
 RULE_BOOL(Bots, BotBardUseOutOfCombatSongs, true) // Determines whether bard bots use additional out of combat songs.
 RULE_BOOL(Bots, BotLevelsWithOwner, false) // Auto-updates spawned bots as owner levels/de-levels (false is original behavior)
+RULE_BOOL(Bots, BotCharacterLevelEnabled, false) // Enables required level to spawn bots
+RULE_INT(Bots, BotCharacterLevel, 0) // 0 as default (if level > this value you can spawn bots if BotCharacterLevelEnabled is true)
 RULE_CATEGORY_END()
 #endif
 
