@@ -119,6 +119,9 @@ RULE_BOOL(Character, MarqueeHPUpdates, false) // Will show Health % in center of
 RULE_REAL(Character, PetPowerActPower, 50.0f)
 RULE_INT(Character, PetPowerMinDmg, 2)
 RULE_INT(Character, PetPowerMaxDmg, 20)
+RULE_INT(Character, IksarCommonTongue, 95) // 95 By default (live-like?)
+RULE_INT(Character, OgreCommonTongue, 95) // 95 By default (live-like?)
+RULE_INT(Character, TrollCommonTongue, 95) // 95 By default (live-like?)
 RULE_CATEGORY_END()
 
 RULE_CATEGORY(Mercs)
@@ -483,7 +486,7 @@ RULE_INT(Aggro, SpellAggroMod, 100)
 RULE_INT(Aggro, SongAggroMod, 33)
 RULE_INT(Aggro, PetSpellAggroMod, 10)
 RULE_REAL(Aggro, TunnelVisionAggroMod, 0.75) //people not currently the top hate generate this much hate on a Tunnel Vision mob
-RULE_INT(Aggro, MaxStunProcAggro, 400) // Set to -1 for no limit. Maxmimum amount of aggro that a stun based proc will add.
+RULE_INT(Aggro, MaxScalingProcAggro, 400) // Set to -1 for no limit. Maxmimum amount of aggro that HP scaling SPA effect in a proc will add.
 RULE_INT(Aggro, IntAggroThreshold, 75) // Int <= this will aggro regardless of level difference.
 RULE_CATEGORY_END()
 
